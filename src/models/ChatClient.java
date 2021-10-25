@@ -1,5 +1,6 @@
 package models;
 
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public interface ChatClient {
@@ -10,4 +11,6 @@ public interface ChatClient {
     List<String> getLoggedUsers();
     List<Message> getMessages();
 
+
+    void addListenerLoggedUsersChanged(ActionListener toAdd);
 }

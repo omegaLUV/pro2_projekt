@@ -1,14 +1,18 @@
 package models;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class inMemoryChatClient implements ChatClient {
+public class InMemoryChatClient implements ChatClient {
     private String loggedUser;
     private List<Message> messages;
     List<String> loggedUsers;
 
-    public inMemoryChatClient() {
+    private List<ActionListener> listenersLoggedUsersChanged = new ArrayList<>();
+
+    public InMemoryChatClient() {
         messages = new ArrayList<>();
         loggedUsers = new ArrayList<>();
     }
@@ -22,12 +26,18 @@ public class inMemoryChatClient implements ChatClient {
     public void login(String userName) {
         loggedUser = userName;
         loggedUsers.add(userName);
+        raiseEvenLoggedUsersChanged();
+
+        messages.add(new Message(Message.USER_LOGGED_IN, userName));
     }
 
     @Override
     public void logout() {
         loggedUsers.remove(loggedUser);
         loggedUser = null;
+        raiseEvenLoggedUsersChanged();
+
+        messages.add(new Message(Message.USER_LOGGED_OUT, loggedUser));
     }
 
     @Override
@@ -43,5 +53,16 @@ public class inMemoryChatClient implements ChatClient {
     @Override
     public List<Message> getMessages() {
         return messages;
+    }
+
+    @Override
+    public void addListenerLoggedUsersChanged(ActionListener toAdd) {
+        listenersLoggedUsersChanged.add(toAdd);
+    }
+
+    private void raiseEvenLoggedUsersChanged(){
+        for (ActionListener al: listenersLoggedUsersChanged) {
+            al.actionPerformed(new ActionEvent(this, 1,"listenersLoggedUsersChanged"));
+        }
     }
 }

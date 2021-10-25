@@ -1,18 +1,18 @@
 import gui.MainFrame;
 import models.ChatClient;
 import models.Message;
-import models.inMemoryChatClient;
-import gui.*;
+import models.InMemoryChatClient;
 
 public class Main {
 
     public static void main(String[] args) {
-         MainFrame mainFrame = new MainFrame(800,600);
+        ChatClient chatClient = new InMemoryChatClient();
+         MainFrame mainFrame = new MainFrame(800,600, chatClient);
          mainFrame.setVisible(true);
     }
 
     private static void testChat() {
-        ChatClient chatClient = new inMemoryChatClient();
+        ChatClient chatClient = new InMemoryChatClient();
 
         chatClient.login("Matvei");
         System.out.println("is logged: " + chatClient.isAuthenticated());
