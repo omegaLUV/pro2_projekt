@@ -114,9 +114,8 @@ public class MainFrame extends JFrame {
     private void initLoggedUsersPanel(JPanel panel) {
 //        tblLoggedUsers = new JTable(new Object[][]{{"11","12"},{"21","22"}}, new String[]{"Col1", "Col2"});
         loggedUsersDataTable = new LoggedUsersDataTable(chatClient);
-        tblLoggedUsers.setModel(loggedUsersDataTable);
-
         tblLoggedUsers = new JTable();
+        tblLoggedUsers.setModel(loggedUsersDataTable);
 
         chatClient.addListenerLoggedUsersChanged(e -> {loggedUsersDataTable.fireTableDataChanged();});
 
@@ -133,4 +132,6 @@ public class MainFrame extends JFrame {
             txtAreaChat.append("\n");
         }
     }
+
+    //aktualizace zprav
 }
