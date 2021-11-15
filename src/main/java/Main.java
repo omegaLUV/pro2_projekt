@@ -1,13 +1,10 @@
 import gui.MainFrame;
-import models.ChatClient;
-import models.Message;
-import models.InMemoryChatClient;
-import models.ToFileChatClient;
+import models.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        ChatClient chatClient = new ToFileChatClient();
+        ChatClient chatClient = new WebChatClient();
          MainFrame mainFrame = new MainFrame(800,600, chatClient);
          mainFrame.setVisible(true);
     }
