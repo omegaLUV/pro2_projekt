@@ -29,6 +29,12 @@ public class Message {
         }
     }
 
+    public Message(String author, String text, LocalDateTime created) {
+        this.author = author;
+        this.text = text;
+        this.created = created;
+    }
+
     @Override
     public String toString() {
         if(Objects.equals(author, AUTHOR_SYSTEM)) {
